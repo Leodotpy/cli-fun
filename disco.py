@@ -24,6 +24,19 @@ class colors:
     FAIL = "\033[91m"
 
 
+def getClearCMD():
+    # for windows
+    if os.name == "nt":
+        return "cls"
+
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        return "clear"
+
+
+clear = getClearCMD()
+
+
 # handler for if ctrl+c is pressed to exit loop
 def handler(signum, frame):
     print("\n")
@@ -38,23 +51,28 @@ floorWidth = 16
 frame = 0
 offsetBool = False
 while True:
-    if frame%5 == 0:
+    if frame % 5 == 0:
         frame = 0
-        offsetBool+=1
-    
+        offsetBool += 1
+
     ll = ""
     for l in range(floorLength):
         wl = ""
         for w in range(floorWidth):
-            if (((w+l+int(offsetBool))%2))==0:
+            if (((w + l + int(offsetBool)) % 2)) == 0:
                 # random color from "\033[90m" to "\033[97m"
-                wl += f"\033[9{str(random.randint(0, 7))}m" + "□ " + effects.ENDC # print even tile
+                wl += (
+                    f"\033[9{str(random.randint(0, 7))}m" + "□ " + effects.ENDC
+                )  # print even tile
             else:
-                wl += f"\033[9{str(random.randint(0, 7))}m" + "■ " + effects.ENDC # print odd tile
+                wl += (
+                    f"\033[9{str(random.randint(0, 7))}m" + "■ " + effects.ENDC
+                )  # print odd tile
 
         ll += "\n" + wl
     sys.stdout.write("\r" + str(ll))
 
     time.sleep(0.2)
-    frame+=1
-    os.system("clear") # clear terminal for new frame Ubuntu; use "cls" for windows
+    frame += 1
+
+    os.system(clear)  # clear terminal for new frame Ubuntu; use "cls" for windows
