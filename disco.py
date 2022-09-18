@@ -8,7 +8,6 @@ import signal
 
 
 class effects:
-
     UNDERLINE = "\033[4m"
     ENDC = "\033[0m"
     BOLD = "\033[1m"
