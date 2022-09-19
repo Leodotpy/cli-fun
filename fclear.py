@@ -17,7 +17,7 @@ def getClearCMD():
         return "clear"
 
 
-# set sorrect console clear command
+# set correct console clear command
 clear = getClearCMD()
 
 
@@ -30,24 +30,14 @@ def handler(signum, frame):
 # set handler
 signal.signal(signal.SIGINT, handler)
 
-# set terminal/disco floor board lenght and width
 l = int(os.get_terminal_size()[1])  # terminal lines
 w = int(os.get_terminal_size()[0])  # terminal columns
 
-frame = 0
-offsetBool = False
 for i in range(max(l, w)+min(l,w)):
     for k in range(min(l, w)):
         if i-k > 0 and i-k <= max(l,w):
             sys.stdout.write("\r\n" + f"{' '*(i-k)}\033[94m{'/'*14}\033[0m")
-
-
-    
-
-    
-        
-    # sys.stdout.write("\r" + str(ll))  # write board
-
+            
     time.sleep(0.001)
     os.system(
         clear
