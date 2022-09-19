@@ -44,8 +44,8 @@ def handler(signum, frame):
 
 signal.signal(signal.SIGINT, handler)
 
-floorLength = 12
-floorWidth = 16
+floorLength = int(os.get_terminal_size()[1])  # terminal lines
+floorWidth = int(os.get_terminal_size()[0] / 2)  # terminal columns
 
 frame = 0
 offsetBool = False
@@ -53,6 +53,7 @@ while True:
     if frame % 5 == 0:
         frame = 0
         offsetBool += 1
+        # update floor incase user changed terminal size
 
     ll = ""
     for l in range(floorLength):
@@ -73,5 +74,4 @@ while True:
 
     time.sleep(0.2)
     frame += 1
-
     os.system(clear)  # clear terminal for new frame Ubuntu; use "cls" for windows
