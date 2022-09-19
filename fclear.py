@@ -36,16 +36,19 @@ w = int(os.get_terminal_size()[0])  # terminal columns
 
 frame = 0
 offsetBool = False
-for i in range(max(l, w)):
+for i in range(max(l, w)+min(l,w)):
     for k in range(min(l, w)):
-        sys.stdout.write("\r\n" + f"{' '*i}/")
+        if i-k > 0 and i-k <= max(l,w):
+            sys.stdout.write("\r\n" + f"{' '*(i-k)}\033[94m{'/'*14}\033[0m")
+
+
     
 
     
         
     # sys.stdout.write("\r" + str(ll))  # write board
 
-    time.sleep(0.006)
+    time.sleep(0.001)
     os.system(
         clear
     )  # clear terminal for new frame, "clear" is used for linux and "cls" for windows
