@@ -48,11 +48,11 @@ while True:
             if (((w + l + int(offsetBool)) % 2)) == 0:
                 # random color from "\033[90m" to "\033[97m"
                 wl += (
-                    f"\033[9{str(random.randint(0, 7))}m" + "□ " + effects.ENDC
-                )  # print even tile
+                    f"\033[9{str(random.randint(0, 7))}m" + "□ " + "\033[0m"
+                )  # print even tile ("\033[0m" ends color code)
             else:
                 wl += (
-                    f"\033[9{str(random.randint(0, 7))}m" + "■ " + effects.ENDC
+                    f"\033[9{str(random.randint(0, 7))}m" + "■ " + "\033[0m"
                 )  # print odd tile
 
         ll += "\n" + wl
