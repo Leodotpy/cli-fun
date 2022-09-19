@@ -7,22 +7,6 @@ import os
 import signal
 
 
-class effects:
-    UNDERLINE = "\033[4m"
-    ENDC = "\033[0m"
-    BOLD = "\033[1m"
-    UNDERLINE = "\033[4m"
-
-
-class colors:
-    HEADER = "\033[95m"
-    OKBLUE = "\033[94m"
-    OKCYAN = "\033[96m"
-    OKGREEN = "\033[92m"
-    WARNING = "\033[93m"
-    FAIL = "\033[91m"
-
-
 def getClearCMD():
     # for windows
     if os.name == "nt":
@@ -33,6 +17,7 @@ def getClearCMD():
         return "clear"
 
 
+# set sorrect console clear command
 clear = getClearCMD()
 
 
@@ -42,8 +27,10 @@ def handler(signum, frame):
     quit()
 
 
+# set handler
 signal.signal(signal.SIGINT, handler)
 
+# set terminal/disco floor board lenght and width
 floorLength = int(os.get_terminal_size()[1])  # terminal lines
 floorWidth = int(os.get_terminal_size()[0] / 2)  # terminal columns
 
@@ -52,8 +39,7 @@ offsetBool = False
 while True:
     if frame % 5 == 0:
         frame = 0
-        offsetBool += 1
-        # update floor incase user changed terminal size
+        offsetBool += 1  # flip bool to offset the board from □ to ■
 
     ll = ""
     for l in range(floorLength):
@@ -70,8 +56,10 @@ while True:
                 )  # print odd tile
 
         ll += "\n" + wl
-    sys.stdout.write("\r" + str(ll))
+    sys.stdout.write("\r" + str(ll))  # write board
 
     time.sleep(0.2)
     frame += 1
-    os.system(clear)  # clear terminal for new frame Ubuntu; use "cls" for windows
+    os.system(
+        clear
+    )  # clear terminal for new frame, "clear" is used for linux and "cls" for windows
