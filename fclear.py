@@ -1,4 +1,4 @@
-# an animated clear command
+# an animated clear terminal command
 
 import random
 import time
@@ -36,6 +36,7 @@ w = int(os.get_terminal_size()[0])  # terminal columns
 for i in range(max(l, w)+min(l,w)):
     for k in range(min(l, w)):
         if i-k > 0 and i-k <= max(l,w):
+            # print ////////////// on line in terminal
             sys.stdout.write("\r\n" + f"{' '*(i-k)}\033[94m{'/'*14}\033[0m")
             
     time.sleep(0.001)
